@@ -338,6 +338,10 @@ $dock_style_modes: [null, shrink, extended, extended-shrink];
     margin-bottom: 0;
 }
 
+#dashtodockContainer.bottom.shrink #dash .dash-background {
+    margin-bottom: 6px;
+}
+
 #dashtodockContainer.straight-corner #dash .dash-background,
 #dashtodockContainer.shrink.straight-corner #dash .dash-background {
     border-radius: 0px;
@@ -519,7 +523,8 @@ $dock_color: $yaru_panel_bg_color;
 
             .dash-background {
                 background: $dock_color; // Yaru: background matching panel
-                border: if($variant == 'light', 1px solid rgba(0, 0, 0, 0.12), none);
+                border: 1px solid if($variant == 'light', rgba(0, 0, 0, 0.12), rgba(255, 255, 255, 0.14));
+                box-shadow: 0 4px 14px rgba(0, 0, 0, if($variant == 'light', 0.12, 0.35));
             }
 
             .dash-separator {
@@ -613,12 +618,13 @@ $dock_color: $yaru_panel_bg_color;
                 &.focused .overview-icon { @include button(active, $tc: $fg, $c:$focus_bg, $style: flat, $always_dark: if($variant == 'light', false, true));}
             }
 
-            // running app dot
+            // running app dot (pill shape)
             .app-grid-running-dot {
                 // manually position the dot within the dash item
-                margin-bottom: $dash_padding + $dash_edge_offset - 3px; // 3px = size of dot (5px) subtracted from its translationY from appDisplay.js
-
-                // margin-bottom: 13px; // hardcoded - Yaru change: move dot a bit down
+                margin-bottom: $dash_padding + $dash_edge_offset - 3px;
+                min-width: 10px;
+                height: 3px;
+                border-radius: 2px;
                 background-color: -st-accent-color; // Yaru: we want an accented dot
             }
         }

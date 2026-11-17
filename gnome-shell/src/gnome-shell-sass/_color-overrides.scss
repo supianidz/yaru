@@ -35,6 +35,6 @@ $system_borders_color: transparentize($system_fg_color, .9);
 $system_insensitive_fg_color: mix($system_bg_color, $system_fg_color, 37%);
 $system_overlay_bg_color: mix($system_base_color, $system_fg_color, 90%); // for non-transparent items, e.g. dash
 
-// Yaru panel & dock colors: Follow $variant (Flat #FFFFFF on light, dark on dark)
-$yaru_panel_bg_color: if($variant == 'light', #ffffff, darken($jet, 2%));
+// Yaru panel & dock colors: Follow $variant (Translucent Frosted Glass / Acrylic effect)
+$yaru_panel_bg_color: if($variant == 'light', rgba(255, 255, 255, 0.82), rgba(30, 30, 34, 0.82));
 $yaru_panel_fg_color: if($variant == 'light', $_base_color_dark, darken($porcelain, 2%));

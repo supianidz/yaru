@@ -290,6 +290,11 @@
 /* Border-radius overrides */
 $yaru_popup_radius: $modal_radius * 1.05;
 
+// Popover distance from floating panel
+.popup-menu-boxpointer {
+  -arrow-rise: 10px;
+}
+
 .datemenu-popover {
   border-radius: $base_border_radius;
 }
