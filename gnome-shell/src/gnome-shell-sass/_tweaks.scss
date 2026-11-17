@@ -110,22 +110,37 @@
   .panel-button {
     @include yaru_panel_button();
 
-    // Activities button with Windows logo (exact equal padding top, bottom, and left)
+    // Activities button with Windows logo (exact equal 6px padding on top, bottom, and left)
     &#panelActivities {
       background-image: if($variant == 'light', url("activities-light.svg"), url("activities-dark.svg")) !important;
-      background-position: center center !important;
       background-repeat: no-repeat !important;
+      background-position: 6px 6px !important;
       background-size: 26px 26px !important;
-      width: 38px !important;
-      min-width: 38px !important;
-      max-width: 38px !important;
-      height: 38px !important;
-      margin: 0 !important;
-      padding: 0 !important;
+      color: transparent !important;
+      font-size: 0 !important;
       border: none !important;
       box-shadow: none !important;
-      -natural-hpadding: 0 !important;
-      -minimum-hpadding: 0 !important;
+      margin: 0 !important;
+      padding: 0 6px !important;
+      -natural-hpadding: 6px !important;
+      -minimum-hpadding: 6px !important;
+
+      * {
+        min-width: 26px !important;
+        min-height: 26px !important;
+        width: 26px !important;
+        height: 26px !important;
+      }
+
+      // Hide workspace dots
+      & .workspace-dot {
+        background-color: transparent !important;
+      }
+
+      & StLabel {
+        color: transparent !important;
+        font-size: 0 !important;
+      }
 
       &:hover {
         background-color: if($variant == 'light', rgba(0, 0, 0, 0.08), rgba(255, 255, 255, 0.12)) !important;
@@ -133,32 +148,6 @@
 
       &:active, &:checked, &:focus {
         background-color: if($variant == 'light', rgba(0, 0, 0, 0.14), rgba(255, 255, 255, 0.18)) !important;
-      }
-
-      & StBoxLayout {
-        spacing: 0 !important;
-        padding: 0 !important;
-        margin: 0 !important;
-      }
-
-      // Hide workspace dots
-      & .workspace-dot {
-        background-color: transparent !important;
-        min-width: 0 !important;
-        min-height: 0 !important;
-        width: 0 !important;
-        height: 0 !important;
-        margin: 0 !important;
-        padding: 0 !important;
-      }
-
-      & StLabel {
-        color: transparent !important;
-        font-size: 0 !important;
-        width: 0 !important;
-        height: 0 !important;
-        margin: 0 !important;
-        padding: 0 !important;
       }
     }
 
