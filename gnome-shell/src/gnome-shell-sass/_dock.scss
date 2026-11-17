@@ -3,12 +3,12 @@
    - https://github.com/micheleg/dash-to-dock/blob/ubuntu-dock/_stylesheet.scss
  */
 
-// Dash to dock specifics
+// Dash to dock specifics (Strict No Radius)
 $dash_padding: $base_padding + 4px; // 10px
-$dash_border_radius: $modal_radius * 3;
+$dash_border_radius: 0px;
 
 // Custom Yaru definition
-$dock_item_border_radius: $base_border_radius * 1.5; // same as $menuitem_border_radius: $base_border_radius * 1.5;
+$dock_item_border_radius: 0px;
 
 $dock_spacing: round($base_padding / 4);
 $dock_bottom_margin: $base_margin * 4;
@@ -525,6 +525,7 @@ $dock_color: $yaru_panel_bg_color;
                 background: $dock_color; // Yaru: background matching panel
                 border: 1px solid if($variant == 'light', rgba(0, 0, 0, 0.12), rgba(255, 255, 255, 0.14));
                 box-shadow: 0 4px 14px rgba(0, 0, 0, if($variant == 'light', 0.12, 0.35));
+                border-radius: 0px !important;
             }
 
             .dash-separator {
@@ -534,21 +535,13 @@ $dock_color: $yaru_panel_bg_color;
 
         #dash {
             .dash-background {
-              // when not shrunk the padding used it $dash_padding;
-              // border radius will be the icon radius increased by dash padding;
-              // this is the correct way of making a consistent look instead of
-              // hard coding
-              border-radius: $dock_item_border_radius + $dash_padding;
+              border-radius: 0px !important;
             }
         }
 
         &.shrink #dash {
             .dash-background {
-              // when shrunk the padding used it shrink($dash_padding);
-              // border radius will be the icon radius increased by shrink($dash padding)
-              // this is the correct way of making a consistent look instead of
-              // hard coding
-              border-radius: $dock_item_border_radius + shrink($dash_padding);
+              border-radius: 0px !important;
             }
         }
 
@@ -558,6 +551,7 @@ $dock_color: $yaru_panel_bg_color;
             &.shrink #dash {
                 .dash-background {
                     background-color: $dock_color;
+                    border-radius: 0px !important;
                 }
             }
         }
@@ -573,13 +567,14 @@ $dock_color: $yaru_panel_bg_color;
                     border-#{opposite($side)}: 1px solid;
                     // Yaru: set clean border
                     border-color: if($variant == 'light', rgba(0, 0, 0, 0.12), lighten($dock_color, 5%));
+                    border-radius: 0px !important;
                 }
             }
         }
 
         .dash-item-container {
             .show-apps, .app-well-app {
-                border-radius: $dock_item_border_radius; //Yaru: sync with pop-over
+                border-radius: 0px !important;
                 &:active, &:checked {
                     .overview-icon {
                         background-color: $active_bg_color; box-shadow: none;
@@ -608,7 +603,7 @@ $dock_color: $yaru_panel_bg_color;
                 .overview-icon {
                     @extend %tile;
                     @include button(normal, $tc:$fg, $c:$normal_bg, $style: flat, $always_dark: if($variant == 'light', false, true));
-                    border-radius: $dock_item_border_radius;
+                    border-radius: 0px !important;
                 }
 
                 &:focus .overview-icon { @include button(focus, $tc:$fg, $c:$bg, $style: flat, $always_dark: if($variant == 'light', false, true));}
@@ -624,7 +619,7 @@ $dock_color: $yaru_panel_bg_color;
                 margin-bottom: $dash_padding + $dash_edge_offset - 3px;
                 min-width: 10px;
                 height: 3px;
-                border-radius: 2px;
+                border-radius: 0px !important;
                 background-color: -st-accent-color; // Yaru: we want an accented dot
             }
         }

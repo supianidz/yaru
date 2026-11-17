@@ -76,18 +76,19 @@
   @include panel_button($bg, $fg, $style, $highlighted_child, $child_class);
 
   font-weight: normal !important;
+  border-radius: 0 !important;
 }
 
 // ============================================================================
-// Panel Tweaks (Floating Panel like Fluent theme)
+// Panel Tweaks (Floating Panel - Strict No Radius)
 // ============================================================================
 // Panel appearance follows theme variant (White in light theme, dark in dark theme)
 
-// Panel - Floating style with rounded corners and elevation shadow
+// Panel - Floating style without radius
 #panel {
   background-color: $yaru_panel_bg_color !important;
   margin: 6px 10px !important;
-  border-radius: $modal_radius !important;
+  border-radius: 0 !important;
   border: 1px solid if($variant == 'light', rgba(0, 0, 0, 0.12), rgba(255, 255, 255, 0.12)) !important;
   box-shadow: 0 3px 10px rgba(0, 0, 0, if($variant == 'light', 0.12, 0.35)) !important;
   padding: 0 4px !important;
@@ -311,8 +312,8 @@
   }
 }
 
-/* Border-radius overrides */
-$yaru_popup_radius: $modal_radius * 1.05;
+/* Border-radius overrides (Zero Radius) */
+$yaru_popup_radius: 0px;
 
 // Popover distance from floating panel
 .popup-menu-boxpointer {
@@ -320,84 +321,50 @@ $yaru_popup_radius: $modal_radius * 1.05;
 }
 
 .datemenu-popover {
-  border-radius: $base_border_radius;
+  border-radius: 0 !important;
 }
 
 .popup-menu-content {
-  border-radius: $yaru_popup_radius;
+  border-radius: 0 !important;
 }
 
 .quick-toggle-menu {
-  border-radius: $yaru_popup_radius;
+  border-radius: 0 !important;
 }
 
 .quick-toggle {
-  border-radius: $yaru_popup_radius;
+  border-radius: 0 !important;
 }
-
-/* More squircles...
-.datemenu-popover {
-  .icon-button,
-  .button {
-    border-radius: $yaru_popup_radius;
-  }
-}
-
-.quick-settings {
-  border-radius: $yaru_popup_radius;
-
-  .icon-button,
-  .button {
-    border-radius: $yaru_popup_radius;
-  }
-}
-
-.quick-toggle-menu {
-  border-radius: $yaru_popup_radius;
-
-  & .header {
-    & .icon {
-      border-radius: $yaru_popup_radius;
-    }
-  }
-}
-*/
 
 .quick-toggle-has-menu {
   & .quick-toggle {
-    &:ltr {
-      border-radius: $yaru_popup_radius 0 0 $yaru_popup_radius;
+    &:ltr, &:rtl {
+      border-radius: 0 !important;
     }
 
-    &:rtl {
-      border-radius: 0 $yaru_popup_radius $yaru_popup_radius 0;
+    &:ltr:last-child, &:rtl:last-child {
+      border-radius: 0 !important;
     }
-
-    &:ltr:last-child { border-radius: $yaru_popup_radius; }
-    &:rtl:last-child { border-radius: $yaru_popup_radius; }
   }
 
   & .quick-toggle-menu-button {
-    &:ltr {
-      border-radius: 0 $yaru_popup_radius $yaru_popup_radius 0;
-    }
-    &:rtl {
-      border-radius: $yaru_popup_radius 0 0 $yaru_popup_radius;
+    &:ltr, &:rtl {
+      border-radius: 0 !important;
     }
   }
 }
 
-/* App switcher frosted styling */
+/* App switcher frosted styling without radius */
 .switcher-list {
   background-color: $yaru_panel_bg_color !important;
   color: $yaru_panel_fg_color !important;
-  border-radius: 20px !important;
+  border-radius: 0 !important;
   border: 1px solid if($variant == 'light', rgba(0, 0, 0, 0.12), rgba(255, 255, 255, 0.14)) !important;
   box-shadow: 0 8px 24px rgba(0, 0, 0, if($variant == 'light', 0.18, 0.45)) !important;
   padding: 14px !important;
 
   .item-box {
-    border-radius: 12px !important;
+    border-radius: 0 !important;
 
     &:selected {
       @if $contrast == 'high' {
@@ -410,18 +377,18 @@ $yaru_popup_radius: $modal_radius * 1.05;
   }
 }
 
-/* OSD Frosted HUD */
+/* OSD Frosted HUD without radius */
 .osd-window {
   background-color: $yaru_panel_bg_color !important;
   color: $yaru_panel_fg_color !important;
-  border-radius: 20px !important;
+  border-radius: 0 !important;
   border: 1px solid if($variant == 'light', rgba(0, 0, 0, 0.12), rgba(255, 255, 255, 0.14)) !important;
   box-shadow: 0 4px 16px rgba(0, 0, 0, if($variant == 'light', 0.14, 0.4)) !important;
   padding: 12px 18px !important;
 
   .level {
     height: 6px;
-    border-radius: 3px;
+    border-radius: 0 !important;
     background-color: if($variant == 'light', rgba(0, 0, 0, 0.1), rgba(255, 255, 255, 0.15));
     -barlevel-active-background-color: -st-accent-color;
     // Yaru: Optimize overdrive color for contrast
@@ -429,11 +396,11 @@ $yaru_popup_radius: $modal_radius * 1.05;
   }
 }
 
-/* Floating Notification Banner */
+/* Floating Notification Banner without radius */
 .notification-banner {
   background-color: $yaru_panel_bg_color !important;
   color: $yaru_panel_fg_color !important;
-  border-radius: 16px !important;
+  border-radius: 0 !important;
   border: 1px solid if($variant == 'light', rgba(0, 0, 0, 0.12), rgba(255, 255, 255, 0.14)) !important;
   box-shadow: 0 6px 20px rgba(0, 0, 0, if($variant == 'light', 0.15, 0.45)) !important;
   margin-top: 8px !important;
@@ -448,4 +415,43 @@ $yaru_popup_radius: $modal_radius * 1.05;
     @extend %button;
     &:insensitive { color: $fg_color; }
   }
+}
+
+// ============================================================================
+// STRICT ZERO RADIUS ("pokoknya tidak ada satupun radius!")
+// ============================================================================
+* {
+  border-radius: 0 !important;
+}
+
+#panel,
+#panel *,
+#dash,
+#dash *,
+#dashtodockContainer,
+#dashtodockContainer *,
+.popup-menu,
+.popup-menu *,
+.popup-menu-content,
+.popup-menu-item,
+.datemenu-popover,
+.quick-settings,
+.quick-settings *,
+.quick-toggle,
+.quick-toggle-menu,
+.modal-dialog,
+.modal-dialog *,
+.prompt-dialog,
+.osd-window,
+.osd-window *,
+.notification-banner,
+.notification-banner *,
+.switcher-list,
+.switcher-list *,
+.window-preview,
+.window-close,
+.search-entry,
+StEntry,
+StButton {
+  border-radius: 0 !important;
 }
