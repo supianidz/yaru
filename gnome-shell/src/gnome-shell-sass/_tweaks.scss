@@ -73,39 +73,36 @@
 }
 
 @mixin yaru_panel_button($bg: $yaru_panel_bg_color, $fg: $yaru_panel_fg_color, $style: null, $highlighted_child: false, $child_class: "") {
-  $yaru_old_variant: $variant;
-  $variant: 'dark'; // Force dark variant for panel buttons
   @include panel_button($bg, $fg, $style, $highlighted_child, $child_class);
-  $variant: $yaru_old_variant;
 
   font-weight: normal !important;
 }
 
 // ============================================================================
-// Panel Tweaks
+// Panel Tweaks (Floating Panel like Fluent theme)
 // ============================================================================
-// Always use dark panel appearance with white text (even in light theme)
-// This provides better visual hierarchy and modern look
+// Panel appearance follows theme variant (White in light theme, dark in dark theme)
 
-// Panel - dark background in all modes (desktop and overview)
+// Panel - Floating style with rounded corners and elevation shadow
 #panel {
   background-color: $yaru_panel_bg_color !important;
+  margin: 6px 10px !important;
+  border-radius: $modal_radius !important;
+  border: 1px solid if($variant == 'light', rgba(0, 0, 0, 0.12), rgba(255, 255, 255, 0.12)) !important;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, if($variant == 'light', 0.12, 0.35)) !important;
+  padding: 0 4px !important;
 
-  @if $variant =='light' {
-    box-shadow: none !important;
-  }
-
-  // Keep panel dark in overview too
+  // Keep panel floating & consistent in overview
   &:overview {
     background-color: $yaru_panel_bg_color !important;
   }
 
-  // Override all panel button styling to use white text and normal font weight
+  // Override all panel button styling to use matching text and normal font weight
   // This needs to be specific enough to override the panel_button mixin
   .panel-button {
     @include yaru_panel_button();
 
-    // Activities button workspace dots should be white
+    // Activities button workspace dots
     &#panelActivities .workspace-dot {
       background-color: $yaru_panel_fg_color !important;
     }
@@ -123,7 +120,7 @@
     }
   }
 
-  // Ensure system status indicators are white
+  // Ensure system status indicators follow panel foreground
   .system-status-icon {
     color: $yaru_panel_fg_color !important;
   }
@@ -134,6 +131,11 @@
 #panel.unlock-screen,
 #panel.login-screen {
   background-color: transparent !important;
+  margin: 0 !important;
+  border: none !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+  padding: 0 !important;
 }
 
 // ============================================================================

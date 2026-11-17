@@ -506,8 +506,7 @@ $dock_style_modes: [null, shrink, extended, extended-shrink];
 
 /* Yaru Dock styling */
 
-// Use dark color for dock in both light and dark themes
-// This matches our panel styling approach
+// Use theme panel color for dock (Flat #FFFFFF on light, dark on dark)
 $dock_color: $yaru_panel_bg_color;
 
 @each $side in bottom, top, left, right {
@@ -519,11 +518,12 @@ $dock_color: $yaru_panel_bg_color;
             padding: 0px;
 
             .dash-background {
-                background: $dock_color; // Yaru: Drop translucent background
+                background: $dock_color; // Yaru: background matching panel
+                border: if($variant == 'light', 1px solid rgba(0, 0, 0, 0.12), none);
             }
 
             .dash-separator {
-                background: transparentize($osd_fg_color, 0.7);
+                background: if($variant == 'light', rgba(0, 0, 0, 0.15), transparentize($osd_fg_color, 0.7));
             }
         }
 
@@ -565,9 +565,9 @@ $dock_color: $yaru_panel_bg_color;
                     // Yaru: remove the border we apply to the upstream dock
                     border: none;
                     // Yaru: then apply the border color to the side opposite to dock position,
-                    border-#{opposite($side)}: 1px;
-                    // Yaru: set a darker border;
-                    border-color: lighten($dock_color, 5%);
+                    border-#{opposite($side)}: 1px solid;
+                    // Yaru: set clean border
+                    border-color: if($variant == 'light', rgba(0, 0, 0, 0.12), lighten($dock_color, 5%));
                 }
             }
         }
@@ -594,7 +594,7 @@ $dock_color: $yaru_panel_bg_color;
                 margin: 0 $dash_spacing;
                 padding-bottom: $dash_edge_offset; // align with other items
 
-                $fg:$system_fg_color;
+                $fg: if($variant == 'light', $_base_color_dark, $system_fg_color);
                 $normal_bg: transparent;
                 $focus_bg: transparentize($fg, .83);
                 $bg: transparentize($fg, .90);
@@ -602,15 +602,15 @@ $dock_color: $yaru_panel_bg_color;
 
                 .overview-icon {
                     @extend %tile;
-                    @include button(normal, $tc:$fg, $c:$normal_bg, $style: flat, $always_dark: true);
+                    @include button(normal, $tc:$fg, $c:$normal_bg, $style: flat, $always_dark: if($variant == 'light', false, true));
                     border-radius: $dock_item_border_radius;
                 }
 
-                &:focus .overview-icon { @include button(focus, $tc:$fg, $c:$bg, $style: flat, $always_dark: true);}
-                &:hover .overview-icon { @include button(hover, $tc:$fg, $c:$bg, $style: flat, $always_dark: true);}
-                &:active .overview-icon { @include button(active, $tc:$fg, $c:$bg, $style: flat, $always_dark: true);}
-                &:checked .overview-icon { @include button(checked, $tc:$fg, $c:$checked_bg, $style: flat, $always_dark: true);}
-                &.focused .overview-icon { @include button(active, $tc: $fg, $c:$focus_bg, $style: flat, $always_dark: true);}
+                &:focus .overview-icon { @include button(focus, $tc:$fg, $c:$bg, $style: flat, $always_dark: if($variant == 'light', false, true));}
+                &:hover .overview-icon { @include button(hover, $tc:$fg, $c:$bg, $style: flat, $always_dark: if($variant == 'light', false, true));}
+                &:active .overview-icon { @include button(active, $tc:$fg, $c:$bg, $style: flat, $always_dark: if($variant == 'light', false, true));}
+                &:checked .overview-icon { @include button(checked, $tc:$fg, $c:$checked_bg, $style: flat, $always_dark: if($variant == 'light', false, true));}
+                &.focused .overview-icon { @include button(active, $tc: $fg, $c:$focus_bg, $style: flat, $always_dark: if($variant == 'light', false, true));}
             }
 
             // running app dot
