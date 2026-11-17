@@ -110,26 +110,26 @@
   .panel-button {
     @include yaru_panel_button();
 
-    // Activities button with Windows logo (exact equal 6px padding on top, bottom, and left)
+    // Activities button with Windows logo (exact equal 7px padding on top, bottom, and left)
     &#panelActivities {
       background-image: if($variant == 'light', url("activities-light.svg"), url("activities-dark.svg")) !important;
       background-repeat: no-repeat !important;
-      background-position: 6px 6px !important;
-      background-size: 26px 26px !important;
+      background-position: 7px 7px !important;
+      background-size: 24px 24px !important;
       color: transparent !important;
       font-size: 0 !important;
       border: none !important;
       box-shadow: none !important;
       margin: 0 !important;
-      padding: 0 6px !important;
-      -natural-hpadding: 6px !important;
-      -minimum-hpadding: 6px !important;
+      padding: 0 7px !important;
+      -natural-hpadding: 7px !important;
+      -minimum-hpadding: 7px !important;
 
       * {
-        min-width: 26px !important;
-        min-height: 26px !important;
-        width: 26px !important;
-        height: 26px !important;
+        min-width: 24px !important;
+        min-height: 24px !important;
+        width: 24px !important;
+        height: 24px !important;
       }
 
       // Hide workspace dots
