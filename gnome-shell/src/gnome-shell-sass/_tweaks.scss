@@ -102,9 +102,33 @@
   .panel-button {
     @include yaru_panel_button();
 
-    // Activities button workspace dots
-    &#panelActivities .workspace-dot {
-      background-color: $yaru_panel_fg_color !important;
+    // Activities button with Windows logo
+    &#panelActivities {
+      background-image: if($variant == 'light', url("activities-light.svg"), url("activities-dark.svg")) !important;
+      background-position: center center !important;
+      background-repeat: no-repeat !important;
+      background-size: 18px 18px !important;
+      min-width: 34px !important;
+
+      & StBoxLayout {
+        spacing: 0;
+      }
+
+      // Hide workspace dots
+      & .workspace-dot {
+        background-color: transparent !important;
+        min-width: 0 !important;
+        min-height: 0 !important;
+        width: 0 !important;
+        height: 0 !important;
+        margin: 0 !important;
+        padding: 0 !important;
+      }
+
+      & StLabel {
+        color: transparent !important;
+        font-size: 0;
+      }
     }
 
     &.screen-recording-indicator {
@@ -363,29 +387,56 @@ $yaru_popup_radius: $modal_radius * 1.05;
   }
 }
 
-/* App switcher fixes */
-.switcher-list .item-box {
-  &:selected {
-    // Yaru: Ring the selection like .overview-tile:drop, OSD fg color in
-    // high-contrast, accented otherwise.
-    // upstream's item-box:focus sets box-shadow !important, so this needs
-    // !important too to win.
-    // See: https://github.com/ubuntu/yaru/issues/4477
-    @if $contrast == 'high' {
-      box-shadow: inset 0 0 0 2px $osd_fg_color !important;
-    } @else {
-      box-shadow: inset 0 0 0 2px -st-accent-color !important;
-      background-color: st-transparentize(-st-accent-color, 0.85);
+/* App switcher frosted styling */
+.switcher-list {
+  background-color: $yaru_panel_bg_color !important;
+  color: $yaru_panel_fg_color !important;
+  border-radius: 20px !important;
+  border: 1px solid if($variant == 'light', rgba(0, 0, 0, 0.12), rgba(255, 255, 255, 0.14)) !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, if($variant == 'light', 0.18, 0.45)) !important;
+  padding: 14px !important;
+
+  .item-box {
+    border-radius: 12px !important;
+
+    &:selected {
+      @if $contrast == 'high' {
+        box-shadow: inset 0 0 0 2px $osd_fg_color !important;
+      } @else {
+        box-shadow: inset 0 0 0 2px -st-accent-color !important;
+        background-color: st-transparentize(-st-accent-color, 0.85);
+      }
     }
   }
 }
 
-/* OSD fixes */
+/* OSD Frosted HUD */
 .osd-window {
+  background-color: $yaru_panel_bg_color !important;
+  color: $yaru_panel_fg_color !important;
+  border-radius: 20px !important;
+  border: 1px solid if($variant == 'light', rgba(0, 0, 0, 0.12), rgba(255, 255, 255, 0.14)) !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, if($variant == 'light', 0.14, 0.4)) !important;
+  padding: 12px 18px !important;
+
   .level {
+    height: 6px;
+    border-radius: 3px;
+    background-color: if($variant == 'light', rgba(0, 0, 0, 0.1), rgba(255, 255, 255, 0.15));
+    -barlevel-active-background-color: -st-accent-color;
     // Yaru: Optimize overdrive color for contrast
     -barlevel-overdrive-color: optimize-contrast($osd_bg_color, $destructive_color, $target: 5.5);
   }
+}
+
+/* Floating Notification Banner */
+.notification-banner {
+  background-color: $yaru_panel_bg_color !important;
+  color: $yaru_panel_fg_color !important;
+  border-radius: 16px !important;
+  border: 1px solid if($variant == 'light', rgba(0, 0, 0, 0.12), rgba(255, 255, 255, 0.14)) !important;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, if($variant == 'light', 0.15, 0.45)) !important;
+  margin-top: 8px !important;
 }
 
 // Yaru: Make pad OSD visible again in the light theme by using osd colors, should be ported to upstream
