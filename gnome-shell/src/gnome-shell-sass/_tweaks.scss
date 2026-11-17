@@ -109,8 +109,8 @@
       background-image: if($variant == 'light', url("activities-light.svg"), url("activities-dark.svg")) !important;
       background-position: center center !important;
       background-repeat: no-repeat !important;
-      background-size: 18px 18px !important;
-      min-width: 34px !important;
+      background-size: 26px 26px !important;
+      min-width: 42px !important;
 
       & StBoxLayout {
         spacing: 0;
