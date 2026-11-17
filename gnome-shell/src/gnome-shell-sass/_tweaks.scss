@@ -92,7 +92,13 @@
   border-radius: 0 !important;
   border: 1px solid if($variant == 'light', rgba(0, 0, 0, 0.12), rgba(255, 255, 255, 0.12)) !important;
   box-shadow: 0 3px 10px rgba(0, 0, 0, if($variant == 'light', 0.12, 0.35)) !important;
-  padding: 0 4px !important;
+  padding: 0 4px 0 0 !important;
+
+  #panelLeft {
+    spacing: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
 
   // Keep panel floating & consistent in overview
   &:overview {
@@ -104,16 +110,35 @@
   .panel-button {
     @include yaru_panel_button();
 
-    // Activities button with Windows logo
+    // Activities button with Windows logo (exact equal padding top, bottom, and left)
     &#panelActivities {
       background-image: if($variant == 'light', url("activities-light.svg"), url("activities-dark.svg")) !important;
       background-position: center center !important;
       background-repeat: no-repeat !important;
       background-size: 26px 26px !important;
-      min-width: 42px !important;
+      width: 38px !important;
+      min-width: 38px !important;
+      max-width: 38px !important;
+      height: 38px !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      border: none !important;
+      box-shadow: none !important;
+      -natural-hpadding: 0 !important;
+      -minimum-hpadding: 0 !important;
+
+      &:hover {
+        background-color: if($variant == 'light', rgba(0, 0, 0, 0.08), rgba(255, 255, 255, 0.12)) !important;
+      }
+
+      &:active, &:checked, &:focus {
+        background-color: if($variant == 'light', rgba(0, 0, 0, 0.14), rgba(255, 255, 255, 0.18)) !important;
+      }
 
       & StBoxLayout {
-        spacing: 0;
+        spacing: 0 !important;
+        padding: 0 !important;
+        margin: 0 !important;
       }
 
       // Hide workspace dots
@@ -129,7 +154,11 @@
 
       & StLabel {
         color: transparent !important;
-        font-size: 0;
+        font-size: 0 !important;
+        width: 0 !important;
+        height: 0 !important;
+        margin: 0 !important;
+        padding: 0 !important;
       }
     }
 
